@@ -38,8 +38,8 @@ function HeroSection({ onOpenCv }) {
             </h1>
 
             <h2 className="sr-only">
-              Portfolio de Alexander Galvez - Desarrollador full stack e
-              ingeniero de sistemas
+              Portfolio de Alexander Galvez - Tecnico de sistemas y
+              Desarrollador full stack
             </h2>
 
             <div
@@ -47,10 +47,10 @@ function HeroSection({ onOpenCv }) {
               aria-label="Especialización principal"
             >
               <p className="hero-role-line">
-                Desarrollador <span>Full Stack</span>
+                Tecnico de <span>Sistemas</span>
               </p>
               <p className="hero-role-line">
-                Ingeniero de <span>Sistemas</span>
+                Desarrollador <span>Full Stack</span>
               </p>
             </div>
 
@@ -82,47 +82,95 @@ function HeroSection({ onOpenCv }) {
               </button>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div className="avatar-block">
-            <Link
-              to="/sobre-mi"
-              className="avatar-wrapper avatar-link"
-              aria-label="Ir a la sección Sobre mí"
+      <div className="hero-avatar-anchor">
+        <div className="avatar-block avatar-block--hex">
+          <Link
+            to="/sobre-mi"
+            className="avatar-wrapper avatar-link avatar-wrapper--hex"
+            aria-label="Ir a la sección Sobre mí"
+          >
+            <div className="avatar-hex-mask">
+              <img
+                src="/imagen_portfolio_mia_retocada-1280.png"
+                alt="Retrato profesional de Alexander Galvez"
+                className="profile-avatar profile-avatar--hex"
+                width="640"
+                height="820"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </div>
+
+            <svg
+              className="avatar-hex-svg"
+              viewBox="0 0 1000 1080"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
             >
-              <picture className="avatar-picture">
-                <source
-                  type="image/avif"
-                  srcSet="
-                    /imagen_portfolio_mia_retocada-480.avif 480w,
-                    /imagen_portfolio_mia_retocada-768.avif 768w,
-                    /imagen_portfolio_mia_retocada-960.avif 960w,
-                    /imagen_portfolio_mia_retocada-1280.avif 1280w
-                  "
-                  sizes="(max-width: 767px) 320px, (max-width: 1279px) 420px, 640px"
-                />
-                <source
-                  type="image/webp"
-                  srcSet="
-                    /imagen_portfolio_mia_retocada-480.webp 480w,
-                    /imagen_portfolio_mia_retocada-768.webp 768w,
-                    /imagen_portfolio_mia_retocada-960.webp 960w,
-                    /imagen_portfolio_mia_retocada-1280.webp 1280w
-                  "
-                  sizes="(max-width: 767px) 320px, (max-width: 1279px) 420px, 640px"
-                />
-                <img
-                  src="/imagen_portfolio_mia_retocada-1280.avif"
-                  alt="Retrato profesional de Alexander Galvez"
-                  className="profile-avatar"
-                  width="640"
-                  height="820"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                />
-              </picture>
-            </Link>
-          </div>
+              <defs>
+                {/* Degradado metálico azul de fondo */}
+                <linearGradient
+                  id="hexBlueGlass"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#00d2ff" />
+                  <stop offset="50%" stopColor="#0066ff" />
+                  <stop offset="100%" stopColor="#0022aa" />
+                </linearGradient>
+
+                {/* Filtro de resplandor para el acabado de cristal de la imagen */}
+                <filter
+                  id="crystalGlow"
+                  x="-20%"
+                  y="-20%"
+                  width="140%"
+                  height="140%"
+                >
+                  <feGaussianBlur stdDeviation="5" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* UN SOLO PATH LIMPIO: Sin línea blanca central intermedia */}
+              <path
+                className="hex-solid-crystal"
+                filter="url(#crystalGlow)"
+                d="M 470,78 
+   L 123,281 
+   Q 93,298 96,335 
+   L 96,745 
+   Q 93,782 123,799 
+   L 470,1002 
+   Q 500,1019 530,1002 
+   L 877,799 
+   Q 907,782 904,745 
+   L 904,335 
+   Q 907,298 877,281 
+   L 530,78 
+   Q 500,61 470,78 Z"
+              />
+
+              {/* Pequeños puntos tecnológicos en los vértices */}
+              <g className="hex-join-points">
+                <circle cx="500" cy="70" r="5.5" />
+                <circle cx="907" cy="305" r="5.5" />
+                <circle cx="907" cy="775" r="5.5" />
+                <circle cx="500" cy="1010" r="5.5" />
+                <circle cx="93" cy="775" r="5.5" />
+                <circle cx="93" cy="305" r="5.5" />
+              </g>
+            </svg>
+          </Link>
         </div>
       </div>
     </header>
