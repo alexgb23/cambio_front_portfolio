@@ -160,15 +160,7 @@ function HeroSection({ onOpenCv }) {
    Q 500,61 470,78 Z"
               />
 
-              {/* Pequeños puntos tecnológicos en los vértices */}
-              <g className="hex-join-points">
-                <circle cx="500" cy="70" r="5.5" />
-                <circle cx="907" cy="305" r="5.5" />
-                <circle cx="907" cy="775" r="5.5" />
-                <circle cx="500" cy="1010" r="5.5" />
-                <circle cx="93" cy="775" r="5.5" />
-                <circle cx="93" cy="305" r="5.5" />
-              </g>
+             
             </svg>
           </Link>
         </div>

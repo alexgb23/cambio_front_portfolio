@@ -2,10 +2,10 @@
    BASE SECTION
    ========================================================= */
 
-.section {
+/* .section {
   position: relative;
   padding: 2.5rem 0;
-}
+} */
 
 .section-spaced {
   padding: 3rem 0;

@@ -15,8 +15,8 @@ const CvModal = lazy(() => import("../modal/CvModal"));
 const THEME_STORAGE_KEY = "syskovex-theme-mode";
 const HOME_BG_SRC = "/fondo_home.webp";
 
-const PLATE_SOURCE_X = 1155;
-const PLATE_SOURCE_Y = 510;
+const PLATE_SOURCE_X = 1150;
+const PLATE_SOURCE_Y = 470;
 
 function MainLayout() {
   const location = useLocation();

@@ -31,7 +31,6 @@
   align-items: stretch;
   gap: clamp(1.25rem, 4vw, 1.75rem);
   padding-top: var(--navbar-height);
-  padding-bottom: clamp(1.25rem, 4vw, 2rem);
 }
 
 .hero-title-container {
@@ -441,14 +440,11 @@
     padding-inline: clamp(1.5rem, 3vw, 3rem);
   }
 
-  .hero-centered-section {
-    padding: 24px 0 0;
-  }
 
   .hero-top-row {
     min-height: clamp(620px, 78vh, 860px);
     padding-top: var(--navbar-height);
-    padding-bottom: 40px;
+
   }
 
   .hero-title-container--syskovex {
