@@ -1,0 +1,26 @@
+# 1. Navegar a la unidad C
+cd /c/
+
+# 2. Crear un nuevo proyecto de React
+npx create-vite@latest portfolio-fronted --template react
+
+# 3. Navegar al directorio del proyecto
+cd portfolio-fronted
+
+# 4. Crear la estructura de carpetas
+mkdir src/components src/hooks src/styles src/sections src/data
+
+# 5. Crear archivos iniciales para componentes y estilos
+touch src/components/Navbar.jsx src/components/Hero.jsx src/components/Footer.jsx
+touch src/styles/components/navbar.css src/styles/components/hero.css src/styles/components/footer.css
+touch src/sections/Home.jsx src/sections/About.jsx
+touch src/data/data.js
+
+# 6. Instalar Axios (si lo deseas)
+npm install axios
+
+# 7. (Opcional) Instalar react-icons si necesitas iconos
+npm install react-icons
+
+# 8. Iniciar la aplicación
+npm start

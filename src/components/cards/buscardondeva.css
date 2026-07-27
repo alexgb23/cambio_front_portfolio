@@ -1,0 +1,548 @@
+/* =========================================================
+   CSS quitado porque NO lo usa el JSX actual
+   ========================================================= */
+
+/* =========================================================
+   LABORATORY CARD
+   Mobile first
+   ========================================================= */
+
+.lab-card-rich {
+  --lab-card-radius-inner: 18px;
+  --lab-card-pad: 0.95rem;
+  --lab-card-gap: 0.95rem;
+  --lab-card-border: color-mix(in srgb, var(--accent) 14%, var(--border));
+  --lab-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.045) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  --lab-card-shadow:
+    var(--shadow-md),
+    0 0 24px color-mix(in srgb, var(--accent) 7%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --lab-card-shadow-hover:
+    0 22px 46px rgba(0, 0, 0, 0.26),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 0 24px color-mix(in srgb, var(--accent) 10%, transparent);
+
+  position: relative;
+  display: grid;
+  gap: var(--lab-card-gap);
+  width: 100%;
+  padding: var(--lab-card-pad);
+  border: 1px solid var(--lab-card-border);
+  border-radius: var(--radius-lg);
+  background: var(--lab-card-bg);
+  box-shadow: var(--lab-card-shadow);
+  overflow: hidden;
+  isolation: isolate;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease,
+    box-shadow 0.24s ease,
+    background 0.24s ease;
+}
+
+.lab-card-rich::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lab-card-rich::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  bottom: -58px;
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--accent-glow), transparent 72%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lab-card-rich:hover,
+.lab-card-rich:focus-within {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border));
+  box-shadow: var(--lab-card-shadow-hover);
+}
+
+.lab-card-rich:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--accent) 72%, white 10%);
+  outline-offset: 4px;
+}
+
+/* =========================================================
+   LINKS / LAYERS
+   ========================================================= */
+
+.lab-card-rich__title,
+.lab-card-rich__heading {
+  position: static;
+}
+
+.lab-card-rich__primary-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lab-card-rich__primary-link:focus-visible {
+  outline: none;
+}
+
+.lab-card-rich__cta-link {
+  position: relative;
+  z-index: 4;
+}
+
+.lab-card-rich__media,
+.lab-card-rich__body,
+.lab-card-rich__tag,
+.lab-card-rich__stats {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.lab-card-rich__media {
+  min-height: 220px;
+  border-radius: var(--lab-card-radius-inner);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, var(--border));
+  background:
+    radial-gradient(circle at 20% 20%, var(--lab-glow-blue), transparent 30%),
+    radial-gradient(circle at 80% 72%, var(--lab-glow-violet), transparent 26%),
+    linear-gradient(180deg, var(--lab-space) 0%, #0b1018 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 16px 34px rgba(0, 0, 0, 0.2);
+}
+
+.lab-card-rich__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.lab-card-rich__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 145, 178, 0.08), transparent 32%),
+    linear-gradient(0deg, rgba(8, 13, 20, 0.82), rgba(8, 13, 20, 0.08));
+  pointer-events: none;
+}
+
+.lab-card-rich__floating {
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.lab-card-rich__body {
+  display: grid;
+  gap: 0.95rem;
+  min-width: 0;
+}
+
+.lab-card-rich__top {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.lab-card-rich__kicker {
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  color: var(--accent);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lab-card-rich__title {
+  margin: 0;
+  color: var(--text-main);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.lab-card-rich__description {
+  margin: 0.85rem 0 0;
+  max-width: 64ch;
+  color: var(--text-soft);
+  font-size: 0.96rem;
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.lab-card-rich__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.92rem 1rem;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 24%, rgba(255, 255, 255, 0.08)) 0%,
+    color-mix(in srgb, var(--accent) 12%, rgba(255, 255, 255, 0.03)) 100%
+  );
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.16),
+    0 0 18px color-mix(in srgb, var(--accent) 12%, transparent);
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+}
+
+.lab-card-rich__cta:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--border-strong));
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.14),
+    0 0 18px rgba(8, 145, 178, 0.09);
+}
+
+.lab-card-rich__cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BADGES / TAGS
+   ========================================================= */
+
+.lab-card-rich__badge,
+.lab-card-rich__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 32px;
+  border-radius: 999px;
+}
+
+.lab-card-rich__badge {
+  padding: 0.45rem 0.74rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lab-card-rich__badge.is-status {
+  border-color: rgba(0, 245, 180, 0.18);
+  background: rgba(0, 245, 180, 0.08);
+  color: var(--lab-neon);
+}
+
+.lab-card-rich__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.lab-card-rich__tag {
+  padding: 0.42rem 0.72rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.lab-card-rich:hover .lab-card-rich__tag {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 14%, var(--border));
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+.lab-card-rich__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.lab-card-rich__stat {
+  display: grid;
+  gap: 0.45rem;
+  padding: 0.95rem;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent) 8%, rgba(255, 255, 255, 0.04)) 0%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.lab-card-rich__stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-sub);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lab-card-rich__stat-label svg {
+  color: var(--accent);
+}
+
+.lab-card-rich__stat strong {
+  color: var(--text-main);
+  font-size: clamp(1.35rem, 6vw, 1.8rem);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.lab-card-rich__stat strong.is-text {
+  font-size: 1.04rem;
+  line-height: 1.3;
+}
+
+.lab-card-rich__stat span {
+  color: var(--text-sub);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* Bloque viejo del fondo que también quito porque lo sustituyo por la versión limpia */
+.project-card-bg__picture,
+.project-card-bg__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.project-card-bg__image {
+  object-fit: contain;
+  object-position: center center;
+}
+
+@media (min-width: 480px) {
+  .lab-card-rich__media,
+  .lab-card-rich__image {
+    min-height: 250px;
+  }
+
+  .lab-card-rich__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lab-card-rich__stat:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .project-card-bg__image {
+    transform: scale(0.9);
+  }
+}
+
+@media (min-width: 640px) {
+  .lab-card-rich {
+    --lab-card-pad: 1rem;
+    --lab-card-gap: 1rem;
+  }
+
+  .lab-card-rich__title {
+    font-size: clamp(1.7rem, 5vw, 2.15rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .lab-card-rich {
+    --lab-card-radius-inner: 20px;
+    --lab-card-pad: 1.1rem;
+    --lab-card-gap: 1.1rem;
+  }
+
+  .lab-card-rich__media,
+  .lab-card-rich__image {
+    min-height: 300px;
+  }
+
+  .lab-card-rich__top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1rem;
+  }
+
+  .lab-card-rich__cta {
+    width: auto;
+    min-width: 180px;
+  }
+
+  .lab-card-rich__stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lab-card-rich__stat:last-child {
+    grid-column: auto;
+  }
+
+  .project-card-bg {
+    background-size: cover;
+  }
+}
+
+@media (min-width: 960px) {
+  .lab-card-rich__body {
+    gap: 1rem;
+  }
+
+  .lab-card-rich__description {
+    font-size: 0.99rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lab-card-rich {
+    grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
+    align-items: stretch;
+    --lab-card-pad: 1.2rem;
+    --lab-card-gap: 1.3rem;
+  }
+
+  .lab-card-rich__body {
+    padding: 0.12rem 0.08rem 0.08rem 0;
+  }
+
+  .lab-card-rich__media,
+  .lab-card-rich__image {
+    min-height: 100%;
+    height: 100%;
+  }
+
+  .lab-card-rich__title {
+    font-size: clamp(2rem, 2.3vw, 2.65rem);
+  }
+
+  .project-card-bg__image {
+    transform: scale(0.98);
+  }
+}
+
+@media (min-width: 1280px) {
+  .lab-card-rich {
+    grid-template-columns: minmax(360px, 430px) minmax(0, 1fr);
+    --lab-card-pad: 1.3rem;
+    --lab-card-gap: 1.45rem;
+  }
+
+  .lab-card-rich__media,
+  .lab-card-rich__image {
+    min-height: 360px;
+  }
+
+  .lab-card-rich__stat {
+    padding: 1rem 1.05rem;
+  }
+
+  .project-card-bg__image {
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 1440px) {
+  .lab-card-rich__title {
+    font-size: 2.8rem;
+  }
+
+  .lab-card-rich__description {
+    max-width: 68ch;
+  }
+}
+
+:root[data-theme="light"] .lab-card-rich {
+  --lab-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 255, 255, 0.84) 100%
+  );
+  --lab-card-shadow:
+    var(--shadow-md),
+    0 0 18px color-mix(in srgb, var(--accent) 5%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  --lab-card-shadow-hover:
+    0 20px 42px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.45) inset,
+    0 0 18px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-card-rich,
+  .lab-card-rich__cta,
+  .lab-card-rich__tag {
+    transition: none;
+  }
+
+  .lab-card-rich:hover,
+  .lab-card-rich__cta:hover,
+  .lab-card-rich:hover .lab-card-rich__tag {
+    transform: none;
+  }
+}

@@ -1,0 +1,204 @@
+.project-detail {
+  position: relative;
+  width: 100%;
+  color: var(--text-main);
+  margin-top: 3rem;
+}
+
+.project-detail__container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 12px;
+  padding-block: 1rem 2rem;
+}
+
+.project-detail__shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.project-detail-mobilebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-detail-mobilebar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-soft) 92%, transparent);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-main) 5%, transparent);
+}
+
+.project-detail-mobilebar__toggle svg {
+  font-size: 1.3rem;
+}
+
+.project-detail-mobilebar__title-wrap {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.project-detail-mobilebar__kicker {
+  color: var(--text-sub);
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.project-detail-mobilebar__title {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-main);
+  font-size: 0.98rem;
+}
+
+.project-detail-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+}
+
+.project-detail-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(3, 8, 20, 0.58);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.project-detail-drawer__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(92vw, 360px);
+  height: 100dvh;
+  padding: 1rem;
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-2) 100%);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+  overflow-y: auto;
+}
+
+.project-detail-drawer__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-detail-drawer__kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: var(--text-sub);
+  font-size: 0.72rem;
+  text-transform: capitalize;
+}
+
+.project-detail-drawer__title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.project-detail-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-soft) 92%, transparent);
+  color: var(--text-soft);
+}
+
+.project-detail-drawer__close svg {
+  font-size: 1.2rem;
+}
+
+.project-detail-drawer.is-open {
+  pointer-events: auto;
+}
+
+.project-detail-drawer.is-open .project-detail-drawer__overlay {
+  opacity: 1;
+}
+
+.project-detail-drawer.is-open .project-detail-drawer__panel {
+  transform: translateX(0);
+}
+
+@media (min-width: 1024px) {
+  .project-detail__container {
+    padding-block: 1.25rem 2.5rem;
+  }
+
+  .project-detail__shell {
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .project-detail-mobilebar,
+  .project-detail-drawer {
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 1023px) {
+  .project-detail__shell > .project-detail__sidebar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-detail-drawer__overlay,
+  .project-detail-drawer__panel {
+    transition: none;
+  }
+}
+
+
+/* @media (min-width: 1024px) {
+  .project-detail__container {
+    padding-block: 1.25rem 2.5rem;
+  }
+
+  .project-detail__shell {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .project-detail-mobilebar,
+  .project-detail-drawer {
+    display: none;
+  }
+} */

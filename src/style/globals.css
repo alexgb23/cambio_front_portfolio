@@ -1,0 +1,442 @@
+/* =========================================================
+   FUENTES LOCALES ULTRAOPTIMIZADAS
+   ========================================================= */
+
+/* Inter Regular */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-v20-latin-regular.woff2") format("woff2");
+}
+
+/* Inter Bold */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/inter-v20-latin-700.woff2") format("woff2");
+}
+
+/* Space Grotesk Regular */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-v22-latin-regular.woff2") format("woff2");
+}
+
+/* Space Grotesk Bold */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-v22-latin-700.woff2") format("woff2");
+}
+
+/* Orbitron Bold */
+@font-face {
+  font-family: "Orbitron";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/orbitron-latin-700-normal.woff2") format("woff2");
+}
+
+/* Orbitron ExtraBold */
+@font-face {
+  font-family: "Orbitron";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/orbitron-latin-800-normal.woff2") format("woff2");
+}
+
+/* =========================================================
+   TOKENS GLOBALES BASE
+   ========================================================= */
+
+:root {
+  --navbar-height: 82px;
+  --container: 1280px;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+
+  --font-body:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-tech: "Orbitron", "Space Grotesk", sans-serif;
+}
+
+/* =========================================================
+   TOKENS GLOBALES - DARK
+   ========================================================= */
+
+:root[data-theme="dark"] {
+  --navbar-height: 82px;
+
+  --bg-app: #030814;
+  --bg-app-rgb: 3, 8, 20;
+  --bg-elevated: #07111f;
+  --bg-card: rgba(8, 18, 32, 0.82);
+  --bg-card-2: rgba(11, 23, 40, 0.94);
+  --bg-soft: rgba(255, 255, 255, 0.03);
+
+  --border: rgba(0, 190, 255, 0.08);
+  --border-strong: rgba(0, 210, 255, 0.18);
+
+  --text-main: #ffffff;
+  --text-soft: #d5deec;
+  --text-sub: #8ea3bc;
+
+  --accent: #00c8ff;
+  --accent-2: #008cff;
+  --accent-green: #14f195;
+  --accent-glow: rgba(0, 200, 255, 0.18);
+
+  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.40);
+  --shadow-lg: 0 30px 90px rgba(0, 30, 80, 0.45);
+
+  --terminal-bg: #08111d;
+  --console-bg: #0b1728;
+
+  --lab-accent-start: #00bfff;
+  --lab-accent-mid: #28d8ff;
+  --lab-accent-end: #14f195;
+
+  --lab-cta-text: #ffffff;
+  --lab-cta-bg-start: rgba(8, 18, 30, 0.88);
+  --lab-cta-bg-end: rgba(8, 18, 30, 0.74);
+  --lab-cta-border: rgba(0, 210, 255, 0.45);
+  --lab-cta-ring: rgba(0, 210, 255, 0.14);
+
+  --lab-panel-text: #ffffff;
+  --lab-panel-text-soft: rgba(255, 255, 255, 0.82);
+  --lab-panel-bg-start: rgba(6, 13, 24, 0.90);
+  --lab-panel-bg-end: rgba(8, 18, 32, 0.82);
+  --lab-panel-border: rgba(0, 210, 255, 0.14);
+  --lab-panel-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+
+  --prueba-color-tarjeta-lab1:#00ffc8;
+  --prueba-color-tarjeta-lab2:#00ccff;
+
+}
+
+/* =========================================================
+   TOKENS GLOBALES - LIGHT
+   ========================================================= */
+
+:root[data-theme="light"] {
+  --navbar-height: 82px;
+
+  --bg-app: #f4f8fb;
+  --bg-app-rgb: 244, 248, 251;
+  --bg-elevated: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.94);
+  --bg-card-2: rgba(238, 244, 251, 0.98);
+  --bg-soft: rgba(15, 23, 42, 0.05);
+
+  --border: rgba(15, 23, 42, 0.09);
+  --border-strong: rgba(15, 23, 42, 0.16);
+
+  --text-main: #0f172a;
+  --text-soft: #27354a;
+  --text-sub: #52637a;
+
+  --accent: #009cff;
+  --accent-2: #0074ff;
+  --accent-green: #0ccf88;
+  --accent-glow: rgba(0, 170, 255, 0.12);
+
+  --shadow-sm: 0 10px 25px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 20px 55px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 30px 80px rgba(15, 23, 42, 0.12);
+
+  --terminal-bg: #ffffff;
+  --console-bg: #1e2530;
+
+  --lab-accent-start: #00a6ff;
+  --lab-accent-mid: #12c8ff;
+  --lab-accent-end: #23d89d;
+
+  --lab-cta-text: #0f172a;
+  --lab-cta-bg-start: rgba(255, 255, 255, 0.96);
+  --lab-cta-bg-end: rgba(238, 244, 251, 0.96);
+  --lab-cta-border: rgba(8, 145, 178, 0.34);
+  --lab-cta-ring: rgba(8, 145, 178, 0.12);
+
+  --lab-panel-text: #0f172a;
+  --lab-panel-text-soft: #334155;
+  --lab-panel-bg-start: rgba(255, 255, 255, 0.94);
+  --lab-panel-bg-end: rgba(238, 244, 251, 0.96);
+  --lab-panel-border: rgba(15, 23, 42, 0.10);
+  --lab-panel-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+
+   --prueba-color-tarjeta-lab1:#00ffc8;
+  --prueba-color-tarjeta-lab2:#00ccff;
+}
+
+/* =========================================================
+   FALLBACK SI data-theme TODAVÍA NO ESTÁ PINTADO
+   ========================================================= */
+
+:root:not([data-theme]) {
+  --bg-app: #030814;
+  --bg-app-rgb: 3, 8, 20;
+  --bg-elevated: #07111f;
+  --bg-card: rgba(8, 18, 32, 0.82);
+  --bg-card-2: rgba(11, 23, 40, 0.94);
+  --bg-soft: rgba(255, 255, 255, 0.03);
+
+  --border: rgba(0, 190, 255, 0.08);
+  --border-strong: rgba(0, 210, 255, 0.18);
+
+  --text-main: #ffffff;
+  --text-soft: #d5deec;
+  --text-sub: #8ea3bc;
+
+  --accent: #00c8ff;
+  --accent-2: #008cff;
+  --accent-green: #14f195;
+  --accent-glow: rgba(0, 200, 255, 0.18);
+
+  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.40);
+  --shadow-lg: 0 30px 90px rgba(0, 30, 80, 0.45);
+
+  --terminal-bg: #08111d;
+  --console-bg: #0b1728;
+}
+
+/* =========================================================
+   MEDIA QUERIES DE TOKENS GLOBALES
+   ========================================================= */
+
+   @media (min-width: 721px) {
+  :root {
+    --navbar-height: 88px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  :root {
+    --container: 1200px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --container: 1420px;
+  }
+}
+
+/* =========================================================
+   RESET / ESTRUCTURA BASE
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  color: var(--text-main);
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--accent) 14%, transparent) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      color-mix(in srgb, var(--accent-2) 12%, transparent) 0%,
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 50% 18%,
+      color-mix(in srgb, var(--accent-green) 7%, transparent) 0%,
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-app) 88%, white 12%) 0%,
+      var(--bg-app) 20%,
+      color-mix(in srgb, var(--bg-app) 94%, black 6%) 68%,
+      color-mix(in srgb, var(--bg-app) 88%, black 12%) 100%
+    );
+
+  background-color: var(--bg-app);
+  background-attachment: fixed;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.038;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--accent) 28%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--accent) 28%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 48px 48px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* =========================================================
+   HELPERS GLOBALES
+   ========================================================= */
+
+.layout-main {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 12px;
+  padding-top: var(--navbar-height);
+}
+
+.layout-main--home {
+  max-width: none;
+  min-height: 100vh;
+  padding-inline: 0;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(3, 8, 20, 0.08) 0%,
+      rgba(3, 8, 20, 0.02) 40%,
+      rgba(3, 8, 20, 0.14) 100%
+    ),
+    url("/fondo_home.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Project detail sigue aparte */
+.layout-main--project-detail {
+  width: 100%;
+  max-width: none;
+  padding-top: 0;
+  padding-inline: 0;
+}
+
+/* Clase Container Limpia (Para usar dentro de la Home o cualquier otra subpágina) */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* quita el padding del main.container en desktop */
+@media (min-width: 1024px) {
+  main.container {
+    padding-inline: 0;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.notranslate,
+code,
+pre,
+.laboratory-counter strong {
+  translate: no !important;
+}

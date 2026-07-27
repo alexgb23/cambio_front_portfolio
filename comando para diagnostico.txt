@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Nombre del archivo de log donde se guardará todo
+LOG_FILE="error_diagnostico.log"
+
+# Limpiar el log anterior si existe
+echo "=== INICIANDO DIAGNÓSTICO DE PROYECTO VITE/REACT ===" > "$LOG_FILE"
+echo "Fecha: $(date)" >> "$LOG_FILE"
+echo "---------------------------------------------------" >> "$LOG_FILE"
+
+echo "⏳ Analizando el proyecto... Revisa '$LOG_FILE' al finalizar."
+
+# 1. Verificar versiones de Node y NPM
+echo -e "\n[1/5] Verificando versiones del entorno..." >> "$LOG_FILE"
+echo "Node version: $(node -v 2>&1)" >> "$LOG_FILE"
+echo "NPM version: $(npm -v 2>&1)" >> "$LOG_FILE"
+
+# 2. Buscar discrepancias de mayúsculas/minúsculas en los imports (Causa común de congelamiento)
+echo -e "\n[2/5] Lista de rutas e imports encontrados en el proyecto..." >> "$LOG_FILE"
+# Busca líneas con 'import' para tener un registro visual de las rutas
+grep -r "import" src/ --include=\*.{js,jsx,ts,tsx} >> "$LOG_FILE" 2>&1
+
+# 3. Limpiar caché corrupta de npm y Vite
+echo -e "\n[3/5] Limpiando carpetas de caché y temporales..." >> "$LOG_FILE"
+echo "Borrando node_modules/.vite (Caché del optimizador de Vite)..." >> "$LOG_FILE"
+rm -rf node_modules/.vite >> "$LOG_FILE" 2>&1
+
+# 4. Comprobar la instalación y buscar vulnerabilidades o bloqueos de dependencias
+echo -e "\n[4/5] Analizando dependencias y árbol de instalación..." >> "$LOG_FILE"
+echo "Ejecutando npm doctor (Verificación de salud de NPM)..." >> "$LOG_FILE"
+npm doctor >> "$LOG_FILE" 2>&1
+
+echo "Ejecutando chequeo de tipos/errores del compilador si aplica..." >> "$LOG_FILE"
+if [ -f "tsconfig.json" ]; then
+    echo "Proyecto TypeScript detectado. Corriendo tsc..." >> "$LOG_FILE"
+    npx tsc --noEmit >> "$LOG_FILE" 2>&1
+else
+    echo "Proyecto JavaScript. Verificando estructura del vite.config.js..." >> "$LOG_FILE"
+    cat vite.config.js >> "$LOG_FILE" 2>&1
+fi
+
+# 5. Probar una compilación de producción para asegurar que no hay errores reales
+echo -e "\n[5/5] Probando prueba de compilación real (Vite Build)..." >> "$LOG_FILE"
+echo "Ejecutando npx vite build para buscar fallos de código..." >> "$LOG_FILE"
+npx vite build >> "$LOG_FILE" 2>&1
+echo "Prueba de compilación completada." >> "$LOG_FILE"
+
+echo "---------------------------------------------------" >> "$LOG_FILE"
+echo "=== DIAGNÓSTICO FINALIZADO ===" >> "$LOG_FILE"
+
+echo "✅ ¡Listo! Abre el archivo '$LOG_FILE' para ver el informe detallado de errores."

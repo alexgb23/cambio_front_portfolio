@@ -1,0 +1,430 @@
+.footer {
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   TARJETA PRINCIPAL
+========================================================= */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--lab-cta-border);
+  background: linear-gradient(
+    180deg,
+    var(--lab-panel-bg-start),
+    var(--lab-panel-bg-end)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    var(--lab-panel-shadow);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent) 90%, white 10%),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -160px;
+  top: -160px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 70%
+  );
+  animation: floatGlow 8s ease-in-out infinite;
+}
+
+/* =========================================================
+   CAPAS DE FONDO
+========================================================= */
+
+.background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradient,
+.circuitLayer,
+.glow {
+  position: absolute;
+  inset: 0;
+}
+
+.gradient {
+  z-index: 0;
+  background:
+    linear-gradient(
+      rgba(var(--bg-app-rgb), 0.22),
+      rgba(var(--bg-app-rgb), 0.16)
+    ),
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--lab-accent-end) 12%, transparent),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      color-mix(in srgb, var(--accent-2) 10%, transparent),
+      transparent 48%
+    );
+}
+
+.circuitLayer {
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.02);
+  animation: circuitFloat 18s ease-in-out infinite;
+  transition: opacity 180ms ease, visibility 180ms ease;
+  will-change: opacity;
+}
+
+.circuitLight {
+  background-image: url("/imgFondoLaboratorio/syskovex-circuit-backgroundLight.webp");
+  opacity: 1;
+  visibility: visible;
+}
+
+.circuitDark {
+  background-image: url("/imgFondoLaboratorio/syskovex-circuit-backgroundDark.webp");
+}
+
+:global([data-theme="dark"]) .circuitLight {
+  opacity: 0;
+  visibility: hidden;
+}
+
+:global([data-theme="dark"]) .circuitDark {
+  opacity: 0.3;
+  visibility: visible;
+}
+
+:global([data-theme="light"]) .circuitLight,
+:global(:root:not([data-theme])) .circuitLight {
+  opacity: 0.3;
+  visibility: visible;
+}
+
+:global([data-theme="light"]) .circuitDark,
+:global(:root:not([data-theme])) .circuitDark {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.glow {
+  z-index: 2;
+}
+
+.glow::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: -180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 18%, transparent),
+    transparent 72%
+  );
+  filter: blur(20px);
+}
+
+.glow::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 250px;
+  left: -150px;
+  bottom: -180px;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--accent-2) 12%, transparent),
+    transparent 75%
+  );
+  filter: blur(40px);
+}
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  padding: 28px;
+}
+
+.left {
+  max-width: 650px;
+}
+
+.left h2 {
+  margin: 0 0 14px;
+  color: var(--lab-panel-text);
+  font-size: clamp(30px, 2vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.left p {
+  margin: 0;
+  color: var(--lab-panel-text-soft);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 470px;
+  padding: 20px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--lab-cta-border);
+  background: linear-gradient(
+    180deg,
+    var(--lab-cta-bg-start),
+    var(--lab-cta-bg-end)
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 0 8px var(--lab-cta-ring);
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--lab-cta-border) 70%, white 30%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 10px color-mix(in srgb, var(--lab-cta-ring) 90%, transparent),
+    0 18px 40px rgba(0, 0, 0, 0.16);
+}
+
+.cta:hover::after {
+  left: 160%;
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+}
+
+.iconCircle {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--lab-accent-mid);
+  border: 1px solid color-mix(in srgb, var(--lab-accent-mid) 40%, transparent);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-2) 28%, var(--bg-elevated)),
+    color-mix(in srgb, var(--bg-app) 70%, black 30%)
+  );
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.05),
+    0 0 25px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.title {
+  color: var(--lab-cta-text);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--lab-panel-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.arrow {
+  color: var(--lab-accent-mid);
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+.cta:hover .arrow {
+  transform: translate(5px, -5px);
+}
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes floatGlow {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes circuitFloat {
+  0% {
+    transform: scale(1.02) translateX(0) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.03) translateX(-6px) translateY(-3px);
+  }
+
+  100% {
+    transform: scale(1.02) translateX(0) translateY(0);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+  .content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 30px;
+  }
+
+  .cta {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .left {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 22px;
+    gap: 22px;
+  }
+
+  .left h2 {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .left p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .cta {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .iconCircle {
+    width: 52px;
+    height: 52px;
+  }
+
+  .title {
+    font-size: 1.08rem;
+  }
+
+  .subtitle {
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card::after,
+  .circuitLayer,
+  .cta,
+  .cta::after,
+  .arrow {
+    animation: none;
+    transition: none;
+  }
+
+  .cta:hover {
+    transform: none;
+  }
+
+  .cta:hover .arrow {
+    transform: none;
+  }
+}

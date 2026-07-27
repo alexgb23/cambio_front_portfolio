@@ -1,0 +1,237 @@
+.treeModule {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-self: stretch;
+}
+
+.treeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.95rem;
+  min-width: 0;
+}
+
+.treeHeader h3 {
+  margin: 0;
+  min-width: 0;
+  font-size: clamp(1rem, 0.94rem + 0.35vw, 1.15rem);
+  color: var(--text-main);
+  overflow-wrap: anywhere;
+}
+
+.fileBadge {
+  flex: 0 0 auto;
+  padding: 0.38rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--text-sub);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.treeShell {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.treePanel {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 0.85rem;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, var(--border));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-elevated) 94%, var(--bg-card-2) 6%),
+      color-mix(in srgb, var(--bg-card) 98%, var(--bg-elevated) 2%)
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+.customScroll {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--scrollbar-thumb, color-mix(in srgb, var(--accent) 24%, transparent))
+    var(--scrollbar-track, transparent);
+}
+
+.customScroll::-webkit-scrollbar {
+  width: var(--scrollbar-size, 8px);
+  height: var(--scrollbar-size, 8px);
+}
+
+.customScroll::-webkit-scrollbar-track {
+  background: var(--scrollbar-track, transparent);
+  border-radius: 999px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, color-mix(in srgb, var(--accent) 24%, transparent));
+  border-radius: 999px;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover, color-mix(in srgb, var(--accent) 38%, transparent));
+}
+
+.treeList {
+  display: grid;
+  gap: 0.14rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 0;
+}
+
+.treeItem,
+.treeDetails {
+  min-width: 0;
+}
+
+.treeDetails > summary {
+  list-style: none;
+}
+
+.treeDetails > summary::-webkit-details-marker {
+  display: none;
+}
+
+.treeRow,
+.treeFileRow {
+  display: grid;
+  grid-template-columns: 14px 16px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.46rem;
+  min-height: 28px;
+  min-width: 0;
+  padding-left: calc(var(--depth, 0) * 0.82rem);
+  padding-right: 0.28rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  color: var(--text-sub);
+}
+
+.treeRow {
+  cursor: pointer;
+  user-select: none;
+}
+
+.treeRow:hover,
+.treeFileRow:hover {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.treeDetails[open] > .treeRow {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+.treeIndent,
+.treeToggle {
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.treeToggle {
+  color: color-mix(in srgb, var(--accent) 88%, white 6%);
+}
+
+.treePlus,
+.treeMinus,
+.treeFolderClosed,
+.treeFolderOpen {
+  grid-area: 1 / 1;
+}
+
+.treeMinus,
+.treeFolderOpen {
+  display: none;
+}
+
+.treeDetails[open] .treePlus,
+.treeDetails[open] .treeFolderClosed {
+  display: none;
+}
+
+.treeDetails[open] .treeMinus,
+.treeDetails[open] .treeFolderOpen {
+  display: block;
+}
+
+.treeIcon,
+.treeIconWrap {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.treeLabel {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kindFolder .treeIconWrap {
+  color: #dcb67a;
+}
+
+.kindPhp .treeIcon {
+  color: #79c0ff;
+}
+
+.kindBlade .treeIcon {
+  color: #4ec9b0;
+}
+
+.kindJson .treeIcon {
+  color: #ce9178;
+}
+
+.kindMd .treeIcon {
+  color: #c586c0;
+}
+
+.kindDocker .treeIcon {
+  color: #57c7ff;
+}
+
+.kindEnv .treeIcon {
+  color: #8ccf7e;
+}
+
+.kindDefault .treeIcon {
+  color: var(--accent);
+}
+
+.emptyState {
+  color: var(--text-sub);
+  font-size: 0.84rem;
+}
+
+@media (min-width: 768px) {
+  .treeRow,
+  .treeFileRow {
+    font-size: 0.82rem;
+  }
+}

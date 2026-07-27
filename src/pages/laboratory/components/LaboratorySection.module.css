@@ -1,0 +1,1030 @@
+/* =========================================================
+   SECCIÓN GENERAL
+========================================================= */
+.laboratorySection {
+  overflow: hidden;
+  margin-top: clamp(-80px, -8vw, -40px);
+}
+
+/* =========================================================
+   TOKENS DERIVADOS DE COLOR
+========================================================= */
+.laboratorySection,
+.labCard,
+.panel,
+.statCard,
+.techCard,
+.arrowButton {
+  --lab-accent: var(--accent, #0891b2);
+
+  --lab-accent-soft: color-mix(in srgb, var(--lab-accent) 22%, white 78%);
+  --lab-accent-light: color-mix(in srgb, var(--lab-accent) 38%, white 62%);
+  --lab-accent-bright: color-mix(in srgb, var(--lab-accent) 68%, white 32%);
+  --lab-accent-mid: color-mix(in srgb, var(--lab-accent) 84%, white 16%);
+  --lab-accent-strong: color-mix(in srgb, var(--lab-accent) 92%, black 8%);
+  --lab-accent-deep: color-mix(in srgb, var(--lab-accent) 72%, black 28%);
+
+  --lab-gradient-start: color-mix(in srgb, var(--lab-accent) 62%, white 38%);
+  --lab-gradient-mid: color-mix(in srgb, var(--lab-accent) 88%, white 12%);
+  --lab-gradient-end: color-mix(in srgb, var(--lab-accent) 76%, black 24%);
+
+  --lab-border-soft: color-mix(
+    in srgb,
+    var(--lab-accent) 18%,
+    rgba(255, 255, 255, 0.16) 82%
+  );
+  --lab-border-strong: color-mix(
+    in srgb,
+    var(--lab-accent) 36%,
+    rgba(255, 255, 255, 0.2) 64%
+  );
+
+  --lab-surface-tint: color-mix(in srgb, var(--lab-accent) 10%, transparent);
+  --lab-surface-tint-strong: color-mix(in srgb, var(--lab-accent) 16%, transparent);
+
+  --lab-glow: color-mix(in srgb, var(--lab-accent) 24%, transparent);
+  --lab-glow-strong: color-mix(in srgb, var(--lab-accent) 38%, transparent);
+
+  --lab-text-accent: color-mix(in srgb, var(--lab-accent) 88%, white 12%);
+  --lab-badge-text: color-mix(in srgb, var(--text-soft) 74%, var(--lab-accent) 26%);
+  --lab-button-text: color-mix(in srgb, var(--lab-accent) 8%, #041318 92%);
+}
+
+/* =========================================================
+   CABECERA DEL BLOQUE
+========================================================= */
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.2rem;
+}
+
+.blockHead::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--lab-gradient-start),
+    var(--lab-gradient-mid),
+    var(--lab-gradient-end)
+  );
+  box-shadow: 0 0 16px var(--lab-glow);
+}
+
+.blockKicker,
+.panelTitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.74rem, 0.72rem + 0.2vw, 0.84rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--lab-gradient-mid) 78%, var(--text-main) 22%);
+}
+
+/* =========================================================
+   FILA / SCROLLER DE TARJETAS
+========================================================= */
+.featuredRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 0.8rem;
+  align-items: stretch;
+}
+
+.featuredScroller {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 1.05rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.08rem 0.08rem 0.5rem;
+  margin: 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  align-items: stretch;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 22px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.featuredScroller::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* =========================================================
+   TARJETA PREMIUM
+========================================================= */
+.labCard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  scroll-snap-align: start;
+  border-radius: 22px;
+  border: 1px solid var(--lab-border-soft);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-card, #0c1220) 90%, var(--lab-surface-tint) 10%) 0%,
+      color-mix(in srgb, var(--bg-card-2, #0a101b) 94%, var(--lab-surface-tint-strong) 6%) 100%
+    );
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+}
+
+.labCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 12%,
+      transparent 32%,
+      transparent 68%,
+      color-mix(in srgb, var(--lab-accent) 14%, transparent) 100%
+    );
+  opacity: 0.72;
+}
+
+.labCard::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% -28% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lab-accent) 14%, transparent) 0%,
+    color-mix(in srgb, var(--lab-accent) 8%, transparent) 28%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  opacity: 0.58;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.labCard > *:not(.labBackgroundPicture):not(.labBackgroundOverlay) {
+  position: relative;
+  z-index: 4;
+}
+
+/* =========================================================
+   FONDO RESPONSIVE
+========================================================= */
+.labBackgroundPicture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+  will-change: opacity;
+}
+
+.labBackgroundPicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.015);
+  filter: saturate(1.02) contrast(1.01);
+}
+
+.labBackgroundOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(6, 10, 18, 0.04) 0%,
+      rgba(6, 10, 18, 0.06) 34%,
+      rgba(6, 10, 18, 0.1) 72%,
+      rgba(6, 10, 18, 0.16) 100%
+    );
+}
+
+.bgLight {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bgDark {
+  opacity: 0;
+  visibility: hidden;
+}
+
+:global([data-theme="dark"]) .bgLight {
+  opacity: 0;
+  visibility: hidden;
+}
+
+:global([data-theme="dark"]) .bgDark {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================================================
+   HEADER SUPERIOR
+========================================================= */
+.labHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem 1rem;
+  flex-wrap: nowrap;
+  padding: 1rem 1rem 0.35rem;
+}
+
+.labHeader h3 {
+  margin: 0;
+  min-width: 0;
+  max-width: 15ch;
+  font-size: clamp(0.96rem, 0.88rem + 0.36vw, 1.18rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: var(--lab-text-accent);
+  -webkit-text-stroke: 0.75px rgba(8, 12, 18, 0.329);
+  text-shadow: 0 1px 12px var(--lab-glow);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .labHeader h3 {
+    background-image: linear-gradient(
+      135deg,
+      var(--lab-gradient-start) 0%,
+      var(--lab-gradient-mid) 52%,
+      var(--lab-gradient-end) 100%
+    );
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 30px;
+  padding: 0.34rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid var(--lab-border-soft);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    color-mix(in srgb, var(--lab-accent) 6%, transparent);
+  color: var(--text-soft);
+  font-size: clamp(0.72rem, 0.7rem + 0.14vw, 0.83rem);
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+}
+
+.isActive .statusDot {
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.42);
+}
+
+.isInactive .statusDot {
+  background: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.36);
+}
+
+/* =========================================================
+   BLOQUE CENTRAL
+========================================================= */
+.labMain {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+  min-height: clamp(122px, 16vw, 154px);
+  padding: 0.45rem 1rem 1rem;
+}
+
+.labAside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.labContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.labContent p {
+  margin: 0;
+  color: color-mix(in srgb, var(--text-soft) 92%, white 8%);
+  font-size: clamp(0.8rem, 0.75rem + 0.18vw, 0.92rem);
+  line-height: 1.52;
+  max-width: 34ch;
+}
+
+/* =========================================================
+   ICONO / HEX PREMIUM
+========================================================= */
+.labHex {
+  position: relative;
+  width: clamp(60px, 5vw, 76px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  --hex-shape: polygon(50% 0%, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
+}
+
+.hexOuter,
+.hexInner,
+.hexLines,
+.hexHalo,
+.hexShadow,
+.hexGlow {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--hex-shape);
+}
+
+.hexOuter {
+  background: linear-gradient(
+    180deg,
+    var(--lab-gradient-start),
+    var(--lab-gradient-end)
+  );
+  filter:
+    drop-shadow(0 0 6px var(--lab-glow))
+    drop-shadow(0 0 14px var(--lab-glow-strong));
+}
+
+.hexInner {
+  inset: 1px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-card, #0c1220) 76%, var(--lab-accent) 24%) 0%,
+      color-mix(in srgb, var(--bg-card-2, #09101a) 86%, var(--lab-accent) 14%) 100%
+    );
+}
+
+.hexLines {
+  inset: 2px;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 49.2%,
+      color-mix(in srgb, var(--lab-accent) 8%, transparent) 50%,
+      transparent 50.8%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 49.2%,
+      color-mix(in srgb, var(--lab-accent) 6%, transparent) 50%,
+      transparent 50.8%
+    );
+  opacity: 0.22;
+}
+
+.hexHalo {
+  inset: 9px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lab-accent) 14%, transparent) 0%,
+    color-mix(in srgb, var(--lab-accent) 8%, transparent) 34%,
+    transparent 76%
+  );
+  opacity: 0.8;
+}
+
+.hexShadow {
+  inset: 2px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 36%,
+    rgba(2, 10, 16, 0.08) 74%,
+    rgba(2, 10, 16, 0.18) 100%
+  );
+  opacity: 0.8;
+}
+
+.hexGlow {
+  inset: 2px;
+  box-shadow: inset 0 0 12px color-mix(in srgb, var(--lab-accent) 10%, transparent);
+  opacity: 0.82;
+}
+
+.labHexIcon {
+  position: relative;
+  z-index: 8;
+  color: var(--lab-text-accent);
+  display: grid;
+  place-items: center;
+}
+
+.labHexIcon svg {
+  width: clamp(24px, 2.2vw, 32px);
+  height: clamp(24px, 2.2vw, 32px);
+  stroke: currentColor;
+  stroke-width: 1.7;
+  fill: none;
+  filter: drop-shadow(0 0 5px var(--lab-glow-strong));
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.labFooter {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0.65rem;
+  flex-wrap: nowrap;
+  padding: 0 1rem 1rem;
+}
+
+.detailButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  min-height: 41px;
+  min-width: 0;
+  padding: 0.72rem 0.95rem;
+  border-radius: 13px;
+  font-size: clamp(0.76rem, 0.72rem + 0.16vw, 0.88rem);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid var(--lab-border-strong);
+  color: var(--lab-button-text);
+  background: linear-gradient(
+    135deg,
+    var(--lab-gradient-start) 0%,
+    var(--lab-gradient-mid) 48%,
+    var(--lab-gradient-end) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 8px 18px color-mix(in srgb, var(--lab-accent) 12%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.detailButton:hover {
+  transform: translateY(-1px);
+  border-color: var(--lab-accent-mid);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 10px 22px color-mix(in srgb, var(--lab-accent) 16%, transparent),
+    0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.countBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.38rem;
+  flex: 1 1 0;
+  min-height: 41px;
+  min-width: 0;
+  padding: 0.72rem 0.84rem;
+  border-radius: 13px;
+  font-size: clamp(0.76rem, 0.72rem + 0.16vw, 0.88rem);
+  color: var(--lab-badge-text);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--lab-accent) 8%, transparent) 0%,
+      color-mix(in srgb, var(--lab-accent) 12%, transparent) 100%
+    );
+  border: 1px solid var(--lab-border-soft);
+  text-align: center;
+  white-space: normal;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.countValue {
+  background-image: linear-gradient(
+    135deg,
+    var(--lab-gradient-start) 0%,
+    var(--lab-gradient-mid) 50%,
+    var(--lab-gradient-end) 100%
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 800;
+  font-size: clamp(0.84rem, 0.8rem + 0.18vw, 0.96rem);
+  -webkit-text-stroke: 0.85px rgba(8, 12, 18, 0.88);
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.22),
+    0 0 12px var(--lab-glow);
+}
+
+/* =========================================================
+   BOTÓN FLECHA DEL CARRUSEL
+========================================================= */
+.arrowButton {
+  display: none;
+  place-items: center;
+  align-self: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--lab-border-soft);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    var(--bg-card, rgba(10, 15, 22, 0.92));
+  box-shadow: var(--shadow-sm);
+  color: var(--lab-text-accent);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.arrowButton:hover {
+  transform: translateY(-1px);
+  border-color: var(--lab-border-strong);
+  box-shadow:
+    var(--shadow-sm),
+    0 0 16px var(--lab-glow);
+}
+
+.arrowButton svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* =========================================================
+   PANELES INFERIORES
+========================================================= */
+.bottomGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  align-items: start;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid var(--lab-border-soft);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--bg-card, rgba(10, 15, 22, 0.92)),
+      var(--bg-card-2, rgba(7, 11, 18, 0.96))
+    );
+  box-shadow: var(--shadow-sm);
+  padding: 0.9rem;
+  min-width: 0;
+}
+
+.panelHead {
+  margin-bottom: 0.75rem;
+}
+
+/* =========================================================
+   GRID DE STATS
+========================================================= */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.statCard {
+  --stat-icon-color: var(--lab-gradient-mid);
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1.5 / 1;
+  display: grid;
+  grid-template-columns: clamp(28px, 2vw, 36px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.45rem, 0.8vw, 0.6rem);
+  padding: clamp(0.58rem, 0.8vw, 0.72rem);
+  border-radius: 16px;
+  border: 1px solid
+    color-mix(in srgb, var(--stat-icon-color) 16%, var(--border, rgba(255, 255, 255, 0.14)));
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    ),
+    color-mix(in srgb, var(--bg-card-2) 88%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.statCard:nth-child(1) {
+  --stat-icon-color: var(--lab-gradient-start);
+}
+
+.statCard:nth-child(2) {
+  --stat-icon-color: var(--lab-gradient-end);
+}
+
+.statCard:nth-child(3) {
+  --stat-icon-color: var(--lab-gradient-mid);
+}
+
+.statCard:nth-child(4) {
+  --stat-icon-color: var(--lab-accent-bright);
+}
+
+.statIcon {
+  width: clamp(28px, 2vw, 36px);
+  height: clamp(28px, 2vw, 36px);
+  display: grid;
+  place-items: center;
+  color: var(--stat-icon-color);
+}
+
+.statIcon::after {
+  content: "";
+  width: clamp(20px, 1.8vw, 28px);
+  height: 1px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--stat-icon-color) 70%, transparent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--stat-icon-color) 22%, transparent);
+  opacity: 0.95;
+  margin-top: 8px;
+}
+
+.statIcon svg {
+  width: clamp(28px, 2vw, 36px);
+  height: clamp(28px, 2vw, 36px);
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+}
+
+.statContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.statCard strong {
+  display: block;
+  margin: 0;
+  font-family: var(--font-tech);
+  font-size: clamp(0.9rem, 0.84rem + 0.32vw, 1.18rem);
+  line-height: 1;
+  color: var(--stat-icon-color);
+  white-space: nowrap;
+}
+
+.statCard span {
+  display: -webkit-box;
+  margin: 0;
+  font-size: clamp(0.62rem, 0.58rem + 0.16vw, 0.74rem);
+  color: var(--text-soft);
+  line-height: 1.18;
+  overflow: visible;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: none;
+  text-wrap: balance;
+}
+
+/* =========================================================
+   GRID DE TECNOLOGÍAS
+========================================================= */
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.techCard {
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 0.7vw, 0.55rem);
+  padding: clamp(0.5rem, 0.9vw, 0.85rem);
+  text-align: center;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    ),
+    color-mix(in srgb, var(--bg-card-2) 88%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.techLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.techLogo img {
+  width: clamp(28px, 3vw, 52px);
+  height: clamp(28px, 3vw, 52px);
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.techCard span {
+  display: -webkit-box;
+  min-width: 0;
+  min-height: 2.4em;
+  max-height: 2.4em;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-soft);
+  font-size: clamp(0.58rem, 0.54rem + 0.18vw, 0.8rem);
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.techCard:last-child {
+  justify-content: center;
+}
+
+.techCard:last-child span {
+  min-height: auto;
+  max-height: none;
+  margin-top: 0;
+}
+
+.techCardMore {
+  justify-content: center;
+  gap: clamp(0.18rem, 0.5vw, 0.35rem);
+}
+
+.techMoreValue {
+  font-family: var(--font-tech);
+  font-size: clamp(1rem, 1.3vw, 1.45rem);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--lab-gradient-mid);
+}
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+@media (max-width: 720px) {
+  .featuredRow {
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .featuredScroller {
+    width: 100vw;
+    grid-auto-columns: 90vw;
+    padding-inline: 1rem;
+    padding-bottom: 0.55rem;
+    box-sizing: border-box;
+    scroll-padding-inline: 1rem;
+    border-radius: 20px;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+
+  .labCard {
+    border-radius: 20px;
+  }
+
+  .labHeader {
+    padding: 0.9rem 0.9rem 0.2rem;
+    flex-wrap: wrap;
+  }
+
+  .labHeader h3 {
+    max-width: 100%;
+  }
+
+  .labMain {
+    grid-template-columns: 68px minmax(0, 1fr);
+    gap: 0.65rem;
+    padding: 0.35rem 0.9rem 0.85rem;
+    min-height: 110px;
+  }
+
+  .labFooter {
+    padding: 0 0.9rem 0.9rem;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+
+  .detailButton,
+  .countBadge {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .techGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+@media (min-width: 721px) {
+  .featuredScroller {
+    grid-auto-columns: minmax(46%, 46%);
+  }
+
+  .panel {
+    padding: 0.9rem;
+  }
+}
+
+/* =========================================================
+   DESKTOP MEDIO
+========================================================= */
+@media (min-width: 900px) {
+  .bottomGrid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .techGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   DESKTOP GRANDE
+========================================================= */
+@media (min-width: 1024px) {
+  .featuredRow {
+    grid-template-columns: minmax(0, 1fr) 54px;
+    gap: 1rem;
+  }
+
+  .featuredScroller {
+    grid-auto-columns: minmax(31.8%, 31.8%);
+    gap: 1rem;
+    overflow: hidden;
+    border-radius: 22px;
+  }
+
+  .labMain {
+    grid-template-columns: 84px minmax(0, 1fr);
+    min-height: 150px;
+  }
+
+  .panel {
+    min-height: 100%;
+    padding: 0.95rem;
+  }
+
+  .arrowButton {
+    display: inline-grid;
+  }
+}
+
+/* =========================================================
+   PANTALLAS GRANDES
+========================================================= */
+@media (min-width: 1280px) {
+  .panel,
+  .labCard,
+  .featuredScroller {
+    border-radius: 24px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .labCard,
+  .detailButton,
+  .arrowButton,
+  .labBackgroundPicture {
+    transition: none;
+  }
+
+  .labCard:hover,
+  .detailButton:hover,
+  .arrowButton:hover {
+    transform: none;
+  }
+
+  .featuredScroller {
+    scroll-behavior: auto;
+  }
+}

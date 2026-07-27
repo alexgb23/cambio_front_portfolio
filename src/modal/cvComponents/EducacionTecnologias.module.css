@@ -1,0 +1,235 @@
+.wrapper {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
+  gap: 6px;
+  margin: 0 0 6px 0;
+}
+
+.column {
+  min-width: 0;
+  padding: 8px 8px 9px;
+  border-radius: 7px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.035),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+  line-height: 1.1;
+}
+
+.icon {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: #2563eb;
+}
+
+.timeline {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  column-gap: 5px;
+  align-items: start;
+  padding: 0 0 4px 0;
+}
+
+.row:last-child {
+  padding-bottom: 0;
+}
+
+.dotCol {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  margin-top: 3px;
+  border-radius: 999px;
+  background: #1d72f3;
+  box-shadow: 0 0 0 1px rgba(29, 114, 243, 0.1);
+  z-index: 1;
+  flex: 0 0 auto;
+}
+
+.line {
+  position: absolute;
+  top: 7px;
+  bottom: -4px;
+  width: 1px;
+  border-radius: 999px;
+  background: rgba(29, 114, 243, 0.22);
+}
+
+.mainBlock {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.periodo {
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  color: #2563eb;
+}
+
+.content {
+  min-width: 0;
+}
+
+.centro {
+  margin: 0 0 1px 0;
+  font-size: 10px;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.list {
+  margin: 0;
+  padding-left: 9px;
+  font-size: 8.5px;
+  line-height: 1.2;
+  color: #334155;
+}
+
+.list li {
+  margin-bottom: 1px;
+}
+
+.list li:last-child {
+  margin-bottom: 0;
+}
+
+.techList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.techCard {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 5px;
+  align-items: center;
+  padding: 6px 7px;
+  border-radius: 7px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow:
+    0 6px 18px rgba(15, 23, 42, 0.03),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.techLabel {
+  position: relative;
+  min-width: 0;
+  padding-right: 5px;
+  font-size: 9px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #334155;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.techLabel::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 0;
+  width: 1px;
+  height: calc(100% - 2px);
+  background: rgba(148, 163, 184, 0.26);
+}
+
+.techText {
+  margin: 0;
+  min-width: 0;
+  font-size: 8.5px;
+  line-height: 1.22;
+  color: #334155;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.techCard.blue {
+  background: linear-gradient(180deg, rgba(239, 246, 255, 0.42) 0%, #ffffff 100%);
+  border-color: rgba(37, 99, 235, 0.16);
+}
+
+.techCard.green {
+  background: linear-gradient(180deg, rgba(240, 253, 244, 0.42) 0%, #ffffff 100%);
+  border-color: rgba(22, 163, 74, 0.16);
+}
+
+.techCard.purple {
+  background: linear-gradient(180deg, rgba(245, 243, 255, 0.48) 0%, #ffffff 100%);
+  border-color: rgba(124, 58, 237, 0.16);
+}
+
+.techCard.slate {
+  background: linear-gradient(180deg, rgba(253, 248, 241, 0.9) 0%, #ffffff 100%);
+  border-color: rgba(226, 125, 10, 0.18);
+}
+
+.techCard.blue .techLabel {
+  color: #1d4ed8;
+}
+
+.techCard.green .techLabel {
+  color: #15803d;
+}
+
+.techCard.purple .techLabel {
+  color: #7c3aed;
+}
+
+.techCard.slate .techLabel {
+  color: #e07800;
+}
+
+@media print {
+  .wrapper,
+  .column,
+  .row,
+  .techCard {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

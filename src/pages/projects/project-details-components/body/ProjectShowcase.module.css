@@ -1,0 +1,207 @@
+.section {
+  margin-top: 1rem;
+  min-width: 0;
+  --showcase-panel-height: clamp(16rem, 30vw, 21rem);
+  --scrollbar-size: 8px;
+  --scrollbar-thumb: color-mix(in srgb, var(--accent) 24%, transparent);
+  --scrollbar-thumb-hover: color-mix(in srgb, var(--accent) 38%, transparent);
+  --scrollbar-track: transparent;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.panel {
+  min-width: 0;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--border));
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--accent) 10%, transparent),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-card-2) 96%, transparent),
+      color-mix(in srgb, var(--bg-card) 100%, transparent)
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent),
+    var(--shadow-sm);
+}
+
+.panelStretch {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  height: var(--showcase-panel-height);
+  max-height: var(--showcase-panel-height);
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.95rem;
+  min-width: 0;
+}
+
+.panelHeader h3 {
+  margin: 0;
+  min-width: 0;
+  font-size: clamp(1rem, 0.94rem + 0.35vw, 1.15rem);
+  color: var(--text-main);
+  overflow-wrap: anywhere;
+}
+
+.fileBadge {
+  flex: 0 0 auto;
+  padding: 0.38rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--text-sub);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.panelBody {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  overflow: hidden;
+}
+
+.customScroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.customScroll::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+.customScroll::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 999px;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+}
+
+.customScroll::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.codePanel {
+  min-width: 0;
+}
+
+.codeBlock,
+.techList {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 10%, var(--border));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg-elevated) 92%, var(--bg-card-2) 8%),
+      color-mix(in srgb, var(--bg-card) 96%, var(--bg-elevated) 4%)
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 3%, transparent);
+}
+
+.codeBlock {
+  overflow: auto;
+  padding: 0.85rem;
+}
+
+.codeLine {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.lineNumber {
+  color: var(--text-sub);
+  opacity: 0.7;
+  text-align: right;
+}
+
+.codeLine code {
+  white-space: pre-wrap;
+  color: var(--text-main);
+}
+
+.techList {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  overflow: auto;
+  padding: 0.85rem;
+}
+
+.techItem {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.techMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: var(--text-main);
+}
+
+.techBar {
+  height: 7px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.techBar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-green));
+}
+
+.emptyState {
+  color: var(--text-sub);
+  font-size: 0.84rem;
+}
+
+@media (min-width: 768px) {
+  .panelStretch {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.55fr) minmax(0, 0.9fr);
+    align-items: stretch;
+  }
+}

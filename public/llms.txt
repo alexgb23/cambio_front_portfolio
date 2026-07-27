@@ -1,0 +1,40 @@
+# Alexander Galvez - Portfolio Técnico
+
+Portfolio profesional de Alexander Galvez, centrado en infraestructura IT, redes, virtualización, automatización y desarrollo de software.
+
+## Perfil
+- Nombre: Alexander Galvez
+- Alias: Alex Galvez
+- Rol: Systems, Infrastructure and Software Technician
+- Ubicación: Barakaldo, País Vasco, España
+
+## Áreas principales
+- Infraestructura IT
+- Redes y conectividad
+- Virtualización
+- Automatización de sistemas
+- Linux
+- Docker
+- PostgreSQL
+- Proxmox
+- pfSense
+- React
+- Laravel
+- Bash scripting
+- IoT
+- Domótica e inmótica
+
+## Secciones del portfolio
+- Inicio: presentación general, enlaces profesionales y acceso a contenidos destacados
+- Sobre mí: perfil técnico y enfoque profesional
+- Proyectos: trabajos y desarrollos destacados
+- Laboratorio: laboratorio técnico y experimentación práctica
+- Contacto: enlaces y canales profesionales
+
+## Canales oficiales
+- Portfolio: https://alex.syskovex.com/
+- GitHub: https://github.com/alexgb23
+- LinkedIn: https://www.linkedin.com/in/alexander-galvez-benavides-450917281/
+
+## Proyecto relacionado
+- SYSKOVEX: https://syskovex.com

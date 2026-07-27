@@ -1,0 +1,75 @@
+=== ESTRUCTURA DEL FRONTEND ===
+src
+src/assets
+src/components
+src/components/cards
+src/components/layout
+src/components/layout/Navbar
+src/components/sections
+src/components/sections/aboutPreview
+src/components/sections/heroSection
+src/hooks
+src/hooks/core
+src/hooks/pages
+src/pages
+src/pages/about
+src/pages/automation
+src/pages/contact
+src/pages/home
+src/pages/infrastructure
+src/pages/laboratory
+src/pages/projects
+src/pages/tarjetas_de_prueba
+src/services
+src/style
+
+=== ARCHIVOS PRINCIPALES ===
+src/App.css
+src/App.jsx
+src/assets/hero.png
+src/assets/react.svg
+src/assets/vite.svg
+src/hooks/HOOK_USAGE_EXAMPLES.txt
+src/hooks/usePageTitle.js
+src/hooks/usePortfolioData.js
+src/main.jsx
+src/services/api.js
+src/style/cards.css
+src/style/globals.css
+src/style/reset.css
+src/style/theme.css
+
+=== DEPENDENCIAS (package.json) ===
+  "name": "portfolio-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  "dependencies": {
+    "atropos": "^2.0.2",
+    "axios": "^1.16.1",
+    "framer-motion": "^12.40.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-icons": "^5.6.0",
+    "react-router-dom": "^6.30.4"
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "vite": "^8.0.12"
+
+=== CONFIGURACIÓN DE VITE ===
+
+=== RUTAS DETECTADAS ===
+src/App.jsx
+src/main.jsx

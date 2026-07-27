@@ -1,0 +1,376 @@
+.section {
+  width: 100%;
+  min-width: 0;
+  margin-top: clamp(1rem, 2vw, 1.35rem);
+  padding: 0.95rem 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--lab-panel-border);
+  background:
+    radial-gradient(
+      circle at top center,
+      color-mix(in srgb, var(--lab-accent-mid) 10%, transparent),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      var(--lab-panel-bg-start),
+      var(--lab-panel-bg-end)
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--lab-accent-mid) 5%, transparent),
+    var(--lab-panel-shadow);
+}
+
+.heading {
+  margin: 0 0 0.8rem;
+  color: var(--lab-panel-text);
+  font-size: 0.96rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  --item-width: 188px;
+  --rail-y: 2.45rem;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-width: max-content;
+  padding: 0 0.1rem;
+}
+
+.railBase {
+  position: absolute;
+  left: 0.2rem;
+  right: 0.2rem;
+  top: var(--rail-y);
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--lab-accent-start) 30%, transparent) 0%,
+    color-mix(in srgb, var(--lab-accent-mid) 42%, transparent) 35%,
+    color-mix(in srgb, var(--lab-accent-mid) 38%, transparent) 72%,
+    color-mix(in srgb, var(--lab-accent-end) 34%, transparent) 100%
+  );
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--lab-accent-mid) 16%, transparent),
+    0 0 18px color-mix(in srgb, var(--lab-accent-mid) 8%, transparent);
+}
+
+.railArrow {
+  position: absolute;
+  left: 0.08rem;
+  top: var(--rail-y);
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%) rotate(180deg);
+  opacity: 0.2;
+}
+
+.railArrow::before,
+.railArrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 7px;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lab-accent-mid) 55%, transparent);
+  transform-origin: right center;
+}
+
+.railArrow::before {
+  top: 3px;
+  transform: rotate(34deg);
+}
+
+.railArrow::after {
+  top: 7px;
+  transform: rotate(-34deg);
+}
+
+.item {
+  width: var(--item-width);
+  min-width: var(--item-width);
+  display: grid;
+  grid-template-rows: 1.45rem 2rem auto auto;
+  justify-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.dateWrap {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.date {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.railSlot {
+  width: 100%;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 2px;
+  width: 150px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.pulse::before {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
+  border-radius: inherit;
+  filter: blur(4px);
+  opacity: 0.86;
+}
+
+.pulseblue {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-start) 96%, white 4%) 0 11%,
+      color-mix(in srgb, var(--lab-accent-start) 42%, transparent) 22%,
+      transparent 42%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--lab-accent-start) 12%, transparent) 0%,
+      color-mix(in srgb, var(--lab-accent-start) 22%, transparent) 16%,
+      color-mix(in srgb, var(--lab-accent-start) 34%, transparent) 32%,
+      color-mix(in srgb, var(--lab-accent-start) 52%, transparent) 50%,
+      color-mix(in srgb, var(--lab-accent-start) 34%, transparent) 68%,
+      color-mix(in srgb, var(--lab-accent-start) 22%, transparent) 84%,
+      color-mix(in srgb, var(--lab-accent-start) 12%, transparent) 100%
+    );
+}
+
+.pulseblue::before {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-start) 24%, transparent) 0 13%,
+      transparent 50%
+    );
+}
+
+.pulseteal {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-mid) 94%, white 6%) 0 11%,
+      color-mix(in srgb, var(--lab-accent-mid) 40%, transparent) 22%,
+      transparent 42%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--lab-accent-mid) 12%, transparent) 0%,
+      color-mix(in srgb, var(--lab-accent-mid) 22%, transparent) 16%,
+      color-mix(in srgb, var(--lab-accent-mid) 34%, transparent) 32%,
+      color-mix(in srgb, var(--lab-accent-mid) 52%, transparent) 50%,
+      color-mix(in srgb, var(--lab-accent-mid) 34%, transparent) 68%,
+      color-mix(in srgb, var(--lab-accent-mid) 22%, transparent) 84%,
+      color-mix(in srgb, var(--lab-accent-mid) 12%, transparent) 100%
+    );
+}
+
+.pulseteal::before {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-mid) 22%, transparent) 0 13%,
+      transparent 50%
+    );
+}
+
+.pulsegreen {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-end) 98%, white 2%) 0 11%,
+      color-mix(in srgb, var(--lab-accent-end) 44%, transparent) 22%,
+      transparent 42%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--lab-accent-end) 12%, transparent) 0%,
+      color-mix(in srgb, var(--lab-accent-end) 22%, transparent) 16%,
+      color-mix(in srgb, var(--lab-accent-end) 36%, transparent) 32%,
+      color-mix(in srgb, var(--lab-accent-end) 56%, transparent) 50%,
+      color-mix(in srgb, var(--lab-accent-end) 36%, transparent) 68%,
+      color-mix(in srgb, var(--lab-accent-end) 22%, transparent) 84%,
+      color-mix(in srgb, var(--lab-accent-end) 12%, transparent) 100%
+    );
+}
+
+.pulsegreen::before {
+  background:
+    radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--lab-accent-end) 24%, transparent) 0 13%,
+      transparent 50%
+    );
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--bg-elevated) 82%, white 18%);
+  position: relative;
+  z-index: 2;
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+}
+
+.dotblue {
+  background: var(--lab-accent-start);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--lab-accent-start) 8%, transparent),
+    0 0 14px color-mix(in srgb, var(--lab-accent-start) 26%, transparent);
+}
+
+.dotblue::before {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lab-accent-start) 18%, transparent),
+    transparent 72%
+  );
+}
+
+.dotteal {
+  background: var(--lab-accent-mid);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--lab-accent-mid) 8%, transparent),
+    0 0 14px color-mix(in srgb, var(--lab-accent-mid) 28%, transparent);
+}
+
+.dotteal::before {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lab-accent-mid) 18%, transparent),
+    transparent 72%
+  );
+}
+
+.dotgreen {
+  background: var(--lab-accent-end);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--lab-accent-end) 10%, transparent),
+    0 0 16px color-mix(in srgb, var(--lab-accent-end) 34%, transparent);
+}
+
+.dotgreen::before {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--lab-accent-end) 22%, transparent),
+    transparent 72%
+  );
+}
+
+.title {
+  margin: 0;
+  padding: 0 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.14;
+  min-height: 1.95rem;
+}
+
+.titleblue {
+  color: color-mix(in srgb, var(--lab-accent-start) 78%, var(--text-main) 22%);
+}
+
+.titleteal {
+  color: color-mix(in srgb, var(--lab-accent-mid) 72%, var(--text-main) 28%);
+}
+
+.titlegreen {
+  color: color-mix(in srgb, var(--lab-accent-end) 78%, var(--text-main) 22%);
+}
+
+.description {
+  margin: 0.28rem 0 0;
+  padding: 0 0.5rem;
+  color: var(--lab-panel-text-soft);
+  font-size: 0.74rem;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 1rem 1rem 1.05rem;
+    border-radius: var(--radius-md);
+  }
+
+  .heading {
+    font-size: 1rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .track {
+    --item-width: 214px;
+    --rail-y: 2.55rem;
+  }
+
+  .item {
+    grid-template-rows: 1.5rem 2.1rem auto auto;
+  }
+
+  .date {
+    font-size: 0.74rem;
+  }
+
+  .pulse {
+    width: 168px;
+  }
+
+  .title {
+    font-size: 0.86rem;
+  }
+
+  .description {
+    font-size: 0.79rem;
+    line-height: 1.25;
+  }
+}

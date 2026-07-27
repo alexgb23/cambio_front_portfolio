@@ -1,0 +1,129 @@
+.section {
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 6px 0;
+  padding: 8px 10px 9px;
+  border-radius: 7px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.035),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.icon {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: #2563eb;
+}
+
+.timeline {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 66px 9px minmax(0, 1fr);
+  gap: 5px;
+  align-items: start;
+  padding: 0 0 5px 0;
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.left {
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1px;
+}
+
+.periodo {
+  font-size: 9.5px;
+  line-height: 1.14;
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  color: #2563eb;
+  white-space: nowrap;
+}
+
+.dotCol {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  margin-top: 3px;
+  border-radius: 999px;
+  background: #1d72f3;
+  box-shadow: 0 0 0 1.5px rgba(29, 114, 243, 0.12);
+  z-index: 1;
+  flex: 0 0 auto;
+}
+
+.line {
+  position: absolute;
+  top: 8px;
+  bottom: -5px;
+  width: 1px;
+  border-radius: 999px;
+  background: rgba(29, 114, 243, 0.2);
+}
+
+.right {
+  min-width: 0;
+}
+
+.company {
+  margin: 0 0 1px 0;
+  font-size: 10.5px;
+  line-height: 1.14;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  text-wrap: balance;
+}
+
+.descripcion {
+  margin: 0;
+  min-width: 0;
+  color: #334155;
+  font-size: 9px;
+  line-height: 1.26;
+  text-align: left;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media print {
+  .section,
+  .timeline,
+  .item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

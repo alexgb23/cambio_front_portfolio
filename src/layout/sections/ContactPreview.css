@@ -1,0 +1,96 @@
+.contact-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-preview__rail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 10px 0;
+  width: 56px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(8, 18, 40, 0.92) 0%, rgba(4, 11, 28, 0.88) 100%);
+  border: 1px solid rgba(95, 160, 255, 0.22);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.contact-preview__rail::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 14px;
+  pointer-events: none;
+  border: 1px solid rgba(80, 180, 255, 0.08);
+}
+
+.contact-preview__icon {
+  position: relative;
+  width: 100%;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.contact-preview__icon svg {
+  font-size: 1.1rem;
+}
+
+.contact-preview__icon:hover {
+  color: #4fc3ff;
+  background: rgba(79, 195, 255, 0.08);
+}
+
+.contact-preview__icon:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(79, 195, 255, 0.55);
+}
+
+.contact-preview__icon + .contact-preview__icon {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.contact-preview__icon--arrow {
+  margin-top: 2px;
+  color: rgba(180, 220, 255, 0.92);
+}
+
+.contact-preview__icon--arrow:hover {
+  color: #6fd3ff;
+  transform: translateY(2px);
+}
+
+@media (max-width: 1024px) {
+  .contact-preview__rail {
+    flex-direction: row;
+    width: auto;
+    padding: 0 10px;
+    min-height: 56px;
+    border-radius: 16px;
+  }
+
+  .contact-preview__icon {
+    width: 52px;
+    min-height: 56px;
+  }
+
+  .contact-preview__icon + .contact-preview__icon {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
