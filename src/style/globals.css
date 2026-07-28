@@ -70,16 +70,13 @@
   --radius-lg: 26px;
 
   --font-body:
-    "Inter",
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-
   --font-display: "Space Grotesk", sans-serif;
   --font-tech: "Orbitron", "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
+
+  --home-bg-dark-url: url("/fondoHome/fondo_home_dark.webp");
+  --home-bg-light-url: url("/fondoHome/fondo_home_light.webp");
 }
 
 /* =========================================================
@@ -108,8 +105,8 @@
   --accent-green: #14f195;
   --accent-glow: rgba(0, 200, 255, 0.18);
 
-  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.30);
-  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.40);
+  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.4);
   --shadow-lg: 0 30px 90px rgba(0, 30, 80, 0.45);
 
   --terminal-bg: #08111d;
@@ -127,14 +124,13 @@
 
   --lab-panel-text: #ffffff;
   --lab-panel-text-soft: rgba(255, 255, 255, 0.82);
-  --lab-panel-bg-start: rgba(6, 13, 24, 0.90);
+  --lab-panel-bg-start: rgba(6, 13, 24, 0.9);
   --lab-panel-bg-end: rgba(8, 18, 32, 0.82);
   --lab-panel-border: rgba(0, 210, 255, 0.14);
   --lab-panel-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
 
-  --prueba-color-tarjeta-lab1:#00ffc8;
-  --prueba-color-tarjeta-lab2:#00ccff;
-
+  --prueba-color-tarjeta-lab1: #00ffc8;
+  --prueba-color-tarjeta-lab2: #00ccff;
 }
 
 /* =========================================================
@@ -184,11 +180,11 @@
   --lab-panel-text-soft: #334155;
   --lab-panel-bg-start: rgba(255, 255, 255, 0.94);
   --lab-panel-bg-end: rgba(238, 244, 251, 0.96);
-  --lab-panel-border: rgba(15, 23, 42, 0.10);
+  --lab-panel-border: rgba(15, 23, 42, 0.1);
   --lab-panel-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
 
-   --prueba-color-tarjeta-lab1:#00ffc8;
-  --prueba-color-tarjeta-lab2:#00ccff;
+  --prueba-color-tarjeta-lab1: #00ffc8;
+  --prueba-color-tarjeta-lab2: #00ccff;
 }
 
 /* =========================================================
@@ -215,8 +211,8 @@
   --accent-green: #14f195;
   --accent-glow: rgba(0, 200, 255, 0.18);
 
-  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.30);
-  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.40);
+  --shadow-sm: 0 8px 35px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 18px 55px rgba(0, 15, 40, 0.4);
   --shadow-lg: 0 30px 90px rgba(0, 30, 80, 0.45);
 
   --terminal-bg: #08111d;
@@ -227,7 +223,7 @@
    MEDIA QUERIES DE TOKENS GLOBALES
    ========================================================= */
 
-   @media (min-width: 721px) {
+@media (min-width: 721px) {
   :root {
     --navbar-height: 88px;
   }
@@ -274,6 +270,7 @@ body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   color: var(--text-main);
+  overflow-x: clip;
   background:
     radial-gradient(
       circle at 100% 0%,
@@ -297,7 +294,6 @@ body {
       color-mix(in srgb, var(--bg-app) 94%, black 6%) 68%,
       color-mix(in srgb, var(--bg-app) 88%, black 12%) 100%
     );
-
   background-color: var(--bg-app);
   background-attachment: fixed;
   transition:
@@ -386,37 +382,13 @@ a {
 }
 
 .layout-main--home {
+  position: relative;
   max-width: none;
-  min-height: 100vh;
+  min-height: auto;
   padding-inline: 12px;
-  background-image:
-    linear-gradient(
-      180deg,
-      rgba(3, 8, 20, 0.025) 0%,
-      rgba(3, 8, 20, 0.01) 40%,
-      rgba(3, 8, 20, 0.05) 100%
-    ),
-    url("/fondo_home.webp");
-  background-repeat: no-repeat;
-  background-position: left 35% top 50%;
-  background-size: cover;
+  background: none;
 }
 
-@media (max-width: 767px) {
-  .layout-main--home {
-    padding-inline: 16px;
-    background-position: cover;
-  }
-}
-
-@media (min-width: 768px) {
-  .layout-main--home {
-    padding-inline: 12px;
-    background-position: center center;
-  }
-}
-
-/* Project detail sigue aparte */
 .layout-main--project-detail {
   width: 100%;
   max-width: none;
@@ -424,14 +396,12 @@ a {
   padding-inline: 0;
 }
 
-/* Clase Container Limpia (Para usar dentro de la Home o cualquier otra subpágina) */
 .container {
   width: 100%;
   max-width: var(--container);
   margin-inline: auto;
 }
 
-/* quita el padding del main.container en desktop */
 @media (min-width: 1024px) {
   main.container {
     padding-inline: 0;
