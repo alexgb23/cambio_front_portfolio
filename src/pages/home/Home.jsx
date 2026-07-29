@@ -10,20 +10,29 @@ import usePageTitle from "../../hooks/usePageTitle";
 import "./Home.css";
 
 const PLATE_SOURCE_X = 1012;
-const PLATE_SOURCE_Y = 480;
+const PLATE_SOURCE_Y = 490;
 const DESKTOP_MEDIA_QUERY = "(min-width: 768px)";
 
 function Home() {
   const { openCvModal, setCvSocialLinks, isDarkMode } = useOutletContext();
 
   const stageRef = useRef(null);
+  const heroHostRef = useRef(null);
   const frameRef = useRef(0);
 
+  // Metadatos de la imagen de fondo realmente aplicada al stage.
   const [homeBgMeta, setHomeBgMeta] = useState({
     src: "",
     naturalWidth: 0,
     naturalHeight: 0,
     loaded: false,
+  });
+
+  // Punto del plato convertido al sistema local del hero para posicionar el avatar.
+  const [heroPlatePoint, setHeroPlatePoint] = useState({
+    x: null,
+    y: null,
+    ready: false,
   });
 
   usePageTitle(
@@ -36,12 +45,14 @@ function Home() {
     error: homeError,
   } = usePortfolioHome();
 
+  // Expone los enlaces sociales al layout padre.
   useEffect(() => {
     if (typeof setCvSocialLinks === "function") {
       setCvSocialLinks(socialLinks);
     }
   }, [socialLinks, setCvSocialLinks]);
 
+  // Precarga ambas imágenes de fondo para evitar parpadeos al cambiar de tema.
   useEffect(() => {
     const darkImg = new Image();
     const lightImg = new Image();
@@ -50,6 +61,7 @@ function Home() {
     lightImg.src = "/fondoHome/fondo_home_light.webp";
   }, []);
 
+  // Obtiene la imagen de fondo activa y sus dimensiones reales.
   useEffect(() => {
     const stageElement = stageRef.current;
     if (!stageElement) return;
@@ -62,6 +74,7 @@ function Home() {
       const matches = [
         ...backgroundImageValue.matchAll(/url\((["']?)(.*?)\1\)/g),
       ];
+
       if (!matches.length) return "";
 
       return matches[matches.length - 1][2];
@@ -93,18 +106,6 @@ function Home() {
         naturalHeight: img.naturalHeight,
         loaded: true,
       });
-
-      console.groupCollapsed("[HOME STAGE] image loaded");
-      console.table({
-        src: renderedBackgroundSrc,
-        naturalWidth: img.naturalWidth,
-        naturalHeight: img.naturalHeight,
-        plateSourceX: PLATE_SOURCE_X,
-        plateSourceY: PLATE_SOURCE_Y,
-        plateRatioX: Number((PLATE_SOURCE_X / img.naturalWidth).toFixed(6)),
-        plateRatioY: Number((PLATE_SOURCE_Y / img.naturalHeight).toFixed(6)),
-      });
-      console.groupEnd();
     };
 
     img.onerror = () => {
@@ -116,8 +117,6 @@ function Home() {
         naturalHeight: 0,
         loaded: false,
       });
-
-      console.error("[HOME STAGE] no se pudo cargar:", renderedBackgroundSrc);
     };
 
     img.src = renderedBackgroundSrc;
@@ -127,14 +126,15 @@ function Home() {
     };
   }, [isDarkMode]);
 
+  // Calcula el punto real del plato dentro del stage y lo traduce al sistema local del hero.
   useEffect(() => {
     if (!homeBgMeta.loaded) return;
 
     const stageElement = stageRef.current;
-    if (!stageElement) return;
+    const heroHostElement = heroHostRef.current;
+    if (!stageElement || !heroHostElement) return;
 
     const desktopMediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
-    let resizeObserver = null;
     let resizeTimeoutId = 0;
 
     const clearMetrics = () => {
@@ -145,15 +145,23 @@ function Home() {
       stageElement.style.removeProperty("--bg-offset-y");
       stageElement.style.removeProperty("--bg-rendered-width");
       stageElement.style.removeProperty("--bg-rendered-height");
+
+      setHeroPlatePoint({
+        x: null,
+        y: null,
+        ready: false,
+      });
     };
 
-    const updateMetrics = (reason = "unknown") => {
+    const updateMetrics = () => {
       if (!desktopMediaQuery.matches) {
         clearMetrics();
         return;
       }
 
       const stageRect = stageElement.getBoundingClientRect();
+      const heroRect = heroHostElement.getBoundingClientRect();
+
       const bgAreaWidth = stageRect.width;
       const bgAreaHeight = stageRect.height;
 
@@ -163,16 +171,10 @@ function Home() {
         !homeBgMeta.naturalWidth ||
         !homeBgMeta.naturalHeight
       ) {
-        console.warn("[HOME STAGE] medidas no válidas", {
-          reason,
-          bgAreaWidth,
-          bgAreaHeight,
-          naturalWidth: homeBgMeta.naturalWidth,
-          naturalHeight: homeBgMeta.naturalHeight,
-        });
         return;
       }
 
+      // El fondo está en cover, así que calculamos su escala renderizada real.
       const scale = Math.max(
         bgAreaWidth / homeBgMeta.naturalWidth,
         bgAreaHeight / homeBgMeta.naturalHeight,
@@ -184,12 +186,14 @@ function Home() {
       const offsetX = (bgAreaWidth - renderedWidth) / 2;
       const offsetY = (bgAreaHeight - renderedHeight) / 2;
 
+      // Coordenadas reales del punto del plato dentro del stage.
       const plateCenterX =
         offsetX + (PLATE_SOURCE_X / homeBgMeta.naturalWidth) * renderedWidth;
 
       const plateCenterY =
         offsetY + (PLATE_SOURCE_Y / homeBgMeta.naturalHeight) * renderedHeight;
 
+      // Variables CSS globales del stage, útiles para overlays y posicionamiento absoluto.
       stageElement.style.setProperty("--plate-debug-x", `${plateCenterX}px`);
       stageElement.style.setProperty("--plate-debug-y", `${plateCenterY}px`);
       stageElement.style.setProperty("--home-bg-scale", `${scale}`);
@@ -204,80 +208,58 @@ function Home() {
         `${renderedHeight}px`,
       );
 
-      console.groupCollapsed(
-        `[HOME STAGE DEBUG] ${reason} | ${Math.round(stageRect.width)}x${Math.round(stageRect.height)}`,
-      );
+      // Convierte el punto global del stage al sistema local del hero.
+      const heroLocalX = plateCenterX - (heroRect.left - stageRect.left);
+      const heroLocalY = plateCenterY - (heroRect.top - stageRect.top);
 
-      console.table({
-        viewportWidth: window.innerWidth,
-        viewportHeight: window.innerHeight,
-        stageWidth: Number(stageRect.width.toFixed(2)),
-        stageHeight: Number(stageRect.height.toFixed(2)),
+      // Evita renders extra cuando el valor apenas cambia.
+      setHeroPlatePoint((prev) => {
+        if (
+          prev.ready &&
+          Math.abs(prev.x - heroLocalX) < 0.5 &&
+          Math.abs(prev.y - heroLocalY) < 0.5
+        ) {
+          return prev;
+        }
+
+        return {
+          x: heroLocalX,
+          y: heroLocalY,
+          ready: true,
+        };
       });
-
-      console.table({
-        naturalWidth: homeBgMeta.naturalWidth,
-        naturalHeight: homeBgMeta.naturalHeight,
-        scale: Number(scale.toFixed(6)),
-        renderedWidth: Number(renderedWidth.toFixed(2)),
-        renderedHeight: Number(renderedHeight.toFixed(2)),
-        offsetX: Number(offsetX.toFixed(2)),
-        offsetY: Number(offsetY.toFixed(2)),
-      });
-
-      console.table({
-        plateSourceX: PLATE_SOURCE_X,
-        plateSourceY: PLATE_SOURCE_Y,
-        plateRatioX: Number(
-          (PLATE_SOURCE_X / homeBgMeta.naturalWidth).toFixed(6),
-        ),
-        plateRatioY: Number(
-          (PLATE_SOURCE_Y / homeBgMeta.naturalHeight).toFixed(6),
-        ),
-        plateCenterX: Number(plateCenterX.toFixed(2)),
-        plateCenterY: Number(plateCenterY.toFixed(2)),
-      });
-
-      console.groupEnd();
     };
 
-    const scheduleStableUpdate = (reason = "stable-update", delay = 140) => {
+    // Espera a que el layout termine de asentarse antes de medir.
+    const scheduleStableUpdate = (delay = 140) => {
       window.clearTimeout(resizeTimeoutId);
+
       resizeTimeoutId = window.setTimeout(() => {
         cancelAnimationFrame(frameRef.current);
+
         frameRef.current = requestAnimationFrame(() => {
           frameRef.current = requestAnimationFrame(() => {
-            updateMetrics(reason);
+            updateMetrics();
           });
         });
       }, delay);
     };
 
     const handleWindowResize = () => {
-      scheduleStableUpdate("window-resize", 140);
+      scheduleStableUpdate(140);
     };
 
     const handleDesktopChange = (event) => {
       if (event.matches) {
-        scheduleStableUpdate("media-enter-desktop", 0);
+        scheduleStableUpdate(0);
       } else {
         clearMetrics();
       }
     };
 
-    if (desktopMediaQuery.matches) {
-      resizeObserver = new ResizeObserver(() => {
-        scheduleStableUpdate("resize-observer", 140);
-      });
-
-      resizeObserver.observe(stageElement);
-
-      scheduleStableUpdate("initial", 0);
-      window.setTimeout(() => scheduleStableUpdate("timeout-250", 0), 250);
-      window.setTimeout(() => scheduleStableUpdate("timeout-500", 0), 500);
-    } else {
-      clearMetrics();
-    }
+    scheduleStableUpdate(0);
+    window.setTimeout(() => scheduleStableUpdate(0), 250);
+    window.setTimeout(() => scheduleStableUpdate(0), 500);
 
     window.addEventListener("resize", handleWindowResize);
 
@@ -288,10 +270,6 @@ function Home() {
     }
 
     return () => {
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
-
       window.removeEventListener("resize", handleWindowResize);
       window.clearTimeout(resizeTimeoutId);
       cancelAnimationFrame(frameRef.current);
@@ -306,6 +284,7 @@ function Home() {
 
   const hasSocialLinks = Array.isArray(socialLinks) && socialLinks.length > 0;
 
+  // Datos estructurados SEO de la home.
   const homeSchema = useMemo(
     () => ({
       "@context": "https://schema.org",
@@ -377,8 +356,12 @@ function Home() {
 
         <div className="home-screen__inner container">
           <div className="home-screen__layout">
-            <section className="home-screen__hero">
-              <HeroSection socialLinks={socialLinks} onOpenCv={openCvModal} />
+            <section ref={heroHostRef} className="home-screen__hero">
+              <HeroSection
+                socialLinks={socialLinks}
+                onOpenCv={openCvModal}
+                platePoint={heroPlatePoint}
+              />
             </section>
 
             <section

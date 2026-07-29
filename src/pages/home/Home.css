@@ -37,21 +37,6 @@
     url("/fondoHome/fondo_home_light.webp");
 }
 
-.plate-debug-point {
-  position: absolute;
-  left: var(--plate-debug-x);
-  top: var(--plate-debug-y);
-  width: 12px;
-  height: 12px;
-  border-radius: 9999px;
-  background: red;
-  border: 2px solid white;
-  box-shadow: 0 0 0 1px black;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 20;
-}
-
 .home-screen__inner {
   position: relative;
   min-height: calc(100vh - var(--navbar-height));
@@ -67,12 +52,13 @@
 }
 
 .home-screen__hero {
+  position: relative;
   min-height: 0;
 }
 
 .home-screen__stacks {
   position: relative;
-  z-index: 2;
+  margin-top: 0;
 }
 
 .home-screen__technologies {
@@ -82,10 +68,31 @@
 
 .home-screen__contact {
   position: absolute;
-  right: -50px;
+  right: clamp(-50px, -2vw, -20px);
   top: 62%;
   transform: translateY(-50%);
   z-index: 8;
+}
+@media (min-width: 768px) {
+  .home-screen__layout {
+    position: relative;
+  }
+
+  .home-screen__stacks {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--plate-debug-y, 0px) + 120px);
+    z-index: 2;
+  }
+
+  .home-screen__technologies {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--plate-debug-y, 0px) + 290px);
+    z-index: 3;
+  }
 }
 
 @media (max-width: 1024px) {

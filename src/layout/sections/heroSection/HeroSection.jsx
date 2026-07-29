@@ -1,11 +1,11 @@
 import { Link } from "react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { HiOutlineBeaker } from "react-icons/hi2";
 
 import "./HeroSection.css";
 
-function HeroSection({ onOpenCv }) {
+function HeroSection({ onOpenCv, platePoint }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,12 +19,21 @@ function HeroSection({ onOpenCv }) {
     }
   }, [onOpenCv]);
 
+  const anchorStyle = useMemo(() => {
+    if (!platePoint?.ready) return undefined;
+
+    return {
+      "--hero-plate-x": `${platePoint.x}px`,
+      "--hero-plate-y": `${platePoint.y}px`,
+    };
+  }, [platePoint]);
+
   return (
     <header
       id="inicio"
       className={`hero-centered-section ${isVisible ? "hero-mounted" : ""}`}
     >
-      <div className="container hero-center-content">
+      <div className="hero-center-content">
         <div className="hero-top-row">
           <div className="hero-title-container hero-title-container--syskovex">
             <span className="hero-kicker hero-kicker--pill">
@@ -85,7 +94,11 @@ function HeroSection({ onOpenCv }) {
         </div>
       </div>
 
-      <div className="hero-avatar-anchor">
+      <div
+        className="hero-avatar-anchor"
+        aria-hidden="true"
+        style={anchorStyle}
+      >
         <div className="avatar-block avatar-block--hex">
           <Link
             to="/sobre-mi"
@@ -112,7 +125,6 @@ function HeroSection({ onOpenCv }) {
               aria-hidden="true"
             >
               <defs>
-                {/* Degradado metálico azul de fondo */}
                 <linearGradient
                   id="hexBlueGlass"
                   x1="0%"
@@ -125,7 +137,6 @@ function HeroSection({ onOpenCv }) {
                   <stop offset="100%" stopColor="#0022aa" />
                 </linearGradient>
 
-                {/* Filtro de resplandor para el acabado de cristal de la imagen */}
                 <filter
                   id="crystalGlow"
                   x="-20%"
@@ -141,26 +152,23 @@ function HeroSection({ onOpenCv }) {
                 </filter>
               </defs>
 
-              {/* UN SOLO PATH LIMPIO: Sin línea blanca central intermedia */}
               <path
                 className="hex-solid-crystal"
                 filter="url(#crystalGlow)"
-                d="M 470,78 
-   L 123,281 
-   Q 93,298 96,335 
-   L 96,745 
-   Q 93,782 123,799 
-   L 470,1002 
-   Q 500,1019 530,1002 
-   L 877,799 
-   Q 907,782 904,745 
-   L 904,335 
-   Q 907,298 877,281 
-   L 530,78 
-   Q 500,61 470,78 Z"
+                d="M 470,78
+                   L 123,281
+                   Q 93,298 96,335
+                   L 96,745
+                   Q 93,782 123,799
+                   L 470,1002
+                   Q 500,1019 530,1002
+                   L 877,799
+                   Q 907,782 904,745
+                   L 904,335
+                   Q 907,298 877,281
+                   L 530,78
+                   Q 500,61 470,78 Z"
               />
-
-             
             </svg>
           </Link>
         </div>
