@@ -298,7 +298,6 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* MOBILE / TABLET */
 .hero-avatar-anchor {
   position: relative;
   width: 100%;
@@ -330,6 +329,10 @@
   pointer-events: none;
 }
 
+.avatar-wrapper {
+  display: block;
+}
+
 .avatar-wrapper--hex {
   position: absolute;
   inset: 0;
@@ -349,6 +352,10 @@
   clip-path: polygon(50% 2%, 96% 24%, 96% 76%, 50% 98%, 4% 76%, 4% 24%);
   overflow: hidden;
   z-index: 2;
+}
+
+.profile-avatar {
+  display: block;
 }
 
 .profile-avatar--hex {
@@ -430,10 +437,6 @@
 }
 
 @media (min-width: 768px) {
-  .layout-main--home {
-    position: relative;
-  }
-
   .hero-center-content {
     position: relative;
     z-index: 1;
