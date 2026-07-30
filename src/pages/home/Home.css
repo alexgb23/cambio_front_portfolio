@@ -100,14 +100,16 @@
     top: calc(var(--plate-debug-y, 0px) + 300px);
     z-index: 3;
   }
-  .home-screen__contact {
+   .home-screen__contact {
     position: absolute;
-    right: 0;
     left: calc(var(--plate-debug-x, 0px) + 20px);
     top: calc(var(--plate-debug-y, 0px) - 150px);
-    z-index: 4;
+    right: auto;
+    width: max-content;
+    max-width: max-content;
     margin-top: 0;
     transform: none;
+    z-index: 4;
   }
 }
 
